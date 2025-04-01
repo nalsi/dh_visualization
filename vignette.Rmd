@@ -1,0 +1,116 @@
+---
+title: "DH visualization dataset vignette"
+author: "Kai Li"
+date: "2025-03-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(ggplot2)
+
+graph = read.csv("./final_data_deposit/graph.csv", stringsAsFactors = F)
+meta = read.csv("./final_data_deposit/metadata.csv", stringsAsFactors = F)
+text = read.csv("./final_data_deposit/text.csv", stringsAsFactors = F)
+
+meta$date = as.numeric(meta$date)
+
+```
+
+## Dataset Introduction
+
+This dataset contains three data files:
+
+1.  **metadata.csv**: the metadata information about each publication extracted from the data sources, including the following columns.
+
+```         
+**id**: The publication ID used in this dataset, such as "LLC-1." The first part of the ID refers to the journal of the publications. 
+**title**: The publication title.
+**date**: The publication year.
+**authors**: The authors of the publication. If a paper has more than one authors, the format is "[author1]; [author2]".
+**affiliations**: The affilitions of the publication. If a paper has more than one affiliations, the format is "[affiliation1]; [affiliation2]".
+**doi**: The DOI of the publication, if available.
+**journal**: The journal name of the publication.
+```
+
+2.  **graph.csv**: the information of each graph used in publications. This file includes the following columns.
+
+```         
+**id**: The publication ID used in this dataset.
+**image_id**: The ID of each graph. 
+**image_url**: The link to the graph, if available.
+**caption**: The caption of the graph.
+```
+
+3.  **text.csv**: the full-text mentions of the graph. This file includes the following columns.
+
+```         
+**image_id**: The ID of each graph. 
+**image_text**: The sentence in which a graph is mentioned in a publication.
+```
+
+## Dataset description
+
+The dataset contains 3,260 papers in the the following four DH journals: *Literary and Linguistic Computing* (LLC), *Digital Scholarship in the Humanities* (DSH), *Journal on Computing and Cultural Heritage* (JOOCH), and *Digital Humanities Quarterly* (DHQ).
+
+``` {r}
+print("Unique papers in the dataset:")
+print(length(unique(meta$id)))
+print("Unique papers with any graph:")
+print(length(unique(graph$id)))
+```
+A summary of each journal is shown in the Table below. The results show that the majority of papers in DSH and JOOCH have at least one graph, contrasted to LLC. Based on our previous finding (Ma & Li, 2022), this shows the diverse flavors of DH journals. 
+
+```{r}
+# Number of papers
+# Number of papers with graph
+# % of Papers with graph
+# Number of graphs
+# Graphs per paper
+
+journal_names = unique(meta$journal)
+sum1 = data.frame()
+
+get_table = function(x) {
+  sub = meta[meta$journal == x,]
+  papers = nrow(sub)
+  sub1 = graph[graph$id %in% sub$id,]
+  papers_g = length(unique(sub1$id))
+  graphs = nrow(sub1)
+  
+  return(
+    data.frame(
+      "journal" = x,
+      "papers" = papers,
+      "papers_w_graph" = papers_g,
+      "share_papers_w_graph" = round(papers_g / papers, digits = 3),
+      "graphs" = graphs,
+      "graphs_p_paper" = round(graphs / papers_g, digits = 1)
+    )
+  )
+}
+
+for (item in journal_names) {
+  sub = get_table(item)
+  sum1 = rbind(sum1, sub)
+}
+
+print(sum1)
+
+
+```
+
+``` {r, fig.width = 5, fig.height = 4, dpi = 500}
+# creates frequency table
+library(dplyr)
+sum = rename(count(meta, journal, date), Freq = n)
+
+# plots lines based on frequency
+ggplot(sum, aes(x = date, y = Freq, group=journal, color=journal)) + 
+  geom_line() +
+  labs(x = "Publication Year", y = "Publications") +
+  scale_color_discrete("Journal") +
+  theme_linedraw()
+```
