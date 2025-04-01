@@ -2,7 +2,8 @@
 title: "DH visualization dataset vignette"
 author: "Kai Li"
 date: "2025-03-18"
-output: html_document
+output: rmarkdown::github_document
+
 ---
 
 ```{r setup, include=FALSE}
