@@ -16,6 +16,7 @@ graph = read.csv("./final_data_deposit/graph.csv", stringsAsFactors = F)
 meta = read.csv("./final_data_deposit/metadata.csv", stringsAsFactors = F)
 text = read.csv("./final_data_deposit/text.csv", stringsAsFactors = F)
 
+meta = meta[duplicated(meta) == F,]
 meta$date = as.numeric(meta$date)
 
 ```
@@ -54,7 +55,7 @@ This dataset contains three data files:
 
 ## Dataset description
 
-The dataset contains 3,260 papers in the the following four DH journals: *Literary and Linguistic Computing* (LLC), *Digital Scholarship in the Humanities* (DSH), *Journal on Computing and Cultural Heritage* (JOOCH), and *Digital Humanities Quarterly* (DHQ).
+The dataset contains 3,274 papers in the the following four DH journals: *Literary and Linguistic Computing* (LLC), *Digital Scholarship in the Humanities* (DSH), *Journal on Computing and Cultural Heritage* (JOOCH), and *Digital Humanities Quarterly* (DHQ).
 
 ``` {r}
 print("Unique papers in the dataset:")
@@ -103,7 +104,7 @@ print(sum1)
 
 ```
 
-``` {r, fig.width = 5, fig.height = 4, dpi = 500}
+``` {r, fig.width = 6, fig.height = 3, dpi = 500}
 # creates frequency table
 library(dplyr)
 sum = rename(count(meta, journal, date), Freq = n)
