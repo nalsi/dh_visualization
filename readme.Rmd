@@ -42,7 +42,6 @@ This dataset contains three data files:
 ```         
 **id**: The publication ID used in this dataset.
 **image_id**: The ID of each graph. 
-**image_url**: The link to the graph, if available.
 **caption**: The caption of the graph.
 ```
 

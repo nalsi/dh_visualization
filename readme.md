@@ -27,7 +27,6 @@ This dataset contains three data files:
 
     **id**: The publication ID used in this dataset.
     **image_id**: The ID of each graph. 
-    **image_url**: The link to the graph, if available.
     **caption**: The caption of the graph.
 
 3.  **text.csv**: the full-text mentions of the graph. This file
@@ -40,14 +39,14 @@ This dataset contains three data files:
 
 ## Dataset description
 
-The dataset contains 3,260 papers in the the following four DH journals:
+The dataset contains 3,274 papers in the the following four DH journals:
 *Literary and Linguistic Computing* (LLC), *Digital Scholarship in the
 Humanities* (DSH), *Journal on Computing and Cultural Heritage* (JOOCH),
 and *Digital Humanities Quarterly* (DHQ).
 
     ## [1] "Unique papers in the dataset:"
 
-    ## [1] 3260
+    ## [1] 3274
 
     ## [1] "Unique papers with any graph:"
 
@@ -64,4 +63,4 @@ shows the diverse flavors of DH journals.
     ## 3   JOOCH    283            263                0.929   2791           10.6
     ## 4     DHQ    701            428                0.611   4233            9.9
 
-![](vignette_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](readme_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
