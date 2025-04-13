@@ -115,3 +115,21 @@ ggplot(sum, aes(x = date, y = Freq, group=journal, color=journal)) +
   scale_color_discrete("Journal") +
   theme_linedraw()
 ```
+
+## Original DH journal list
+
+The original journal list is available in the SupplementaryMaterials_DHJournalList.xlsx file.
+
+## Version history
+
+### V 0.84
+```
+- Add journal summary information to the readme file and folder.
+```
+
+### V 0.82
+```
+- Fix minor errors in the data.
+```
+
+### V 0.80

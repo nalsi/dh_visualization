@@ -64,3 +64,20 @@ shows the diverse flavors of DH journals.
     ## 4     DHQ    701            428                0.611   4233            9.9
 
 ![](readme_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+## Original DH journal list
+
+The original journal list is available in the
+SupplementaryMaterials_DHJournalList.xlsx file.
+
+## Version history
+
+### V 0.84
+
+    - Add journal summary information to the readme file and folder.
+
+### V 0.82
+
+    - Fix minor errors in the data.
+
+### V 0.80
